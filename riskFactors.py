@@ -1,0 +1,4 @@
+#State,Heart Disease Death Rate (2007),Stroke Death Rate (2007),HIV Diagnosis Rate (2009),CLABSI-SIR (2010),Motor Vehicle Death Rate (2009),Opioid Analgesics Deaths (2007),Teen Birth Rate (2009),Diagnosed High Cholesterol (2009),Diagnosed Hypertension (2009),Medicated Hypertension (2009),Adult Smoking (2010),Youth Smoking (2009),Adult Obesity (2010),Youth Obesity (2009),Adult Seat Belt Use (2009),Youth Seat Belt Use (2009),Adult Binge Drinking (2010),Youth Binge Drinking (2009),Colorectal Cancer Screening (2010),Without Health Care Coverage (2010)
+
+with open('./skilaverkefni6/riskFactors.csv', 'r') as f:
+    print(f.readline().split(","))
