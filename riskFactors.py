@@ -29,14 +29,9 @@ def parse_csv(csv_content):
 # Which is assigned as a global variable
 csv_content = open_csv('riskFactors.csv')
 
-def get_state_max_min(line_content):
-    print((csv_content[0].split(",")[1]))
-    HeartDiseaseDeathRateMax = sorted(parsed_csv, key=itemgetter(1), reverse=True)
-    HeartDiseaseDeathRateMin = sorted(parsed_csv, key=itemgetter(1), reverse=False)
-    print(HeartDiseaseDeathRateMin[0][0],HeartDiseaseDeathRateMin[0][1])
-    print(HeartDiseaseDeathRateMax[0][0],HeartDiseaseDeathRateMax[0][1])
-
+# Main
 if csv_content != "":
+    # Call the parse list
     parse_csv(csv_content)
     count = 1
     line_split = csv_content[0].split(",")
@@ -48,32 +43,24 @@ if csv_content != "":
         # Itterate through the top level indicators
         indicator_value = line_split[count]
 
-        
+        # Get the max for the specified indicator
         indicator_max_value = max(parsed_csv,key=itemgetter(count))
-        indicator_min_value = min(parsed_csv,key=itemgetter(count))
+        max_value = str(indicator_max_value[count])
         state_value_max = indicator_max_value[0]
-        state_value_min = indicator_max_value[0]
 
-        max_value = "{} {:6} {}".format(indicator_max_value[0],"",indicator_max_value(count))
-        min_value = "{} {:6} {}".format(indicator_min_value[0],"",indicator_min_value(count))
-
-        print("{:<33s}: {:<21s} {:>15s}".format(indicator_value ,max_value, min_value))
-        count += 1
-    #for x in line_split:
-    #    count += 1
-    #    print(line_split[count])
-    #    #for t in parsed_csv:
-    #    #    print(t[0])
+        # Get the min for the specified indicator
+        indicator_min_value = min(parsed_csv,key=itemgetter(count))
+        min_value = str(indicator_min_value[count])
+        state_value_min = indicator_min_value[0]
         
+        #a. The first one (“Indicator”) is of size 33, left justified.
+        #b. The second one (the “Min” state) is of size 21, left justified.
+        #c. The third one (the “Min” value) is of size 6, right justified.
+        #d. The forth one (empty space) is of size 6.
+        #e. The fifth one (the “Max” state) is of size 15, left justified.
+        #f. The sixth one (the “Max” value) is of size 6, right justified.
 
-    #for p_csv in parsed_csv:
-    #    #print(set_csv_values(StateValue=p_csv[0],HeartDiseaseDeathRateValue=p_csv[1]))
-    #    print(p_csv)
-    #a. The first one (“Indicator”) is of size 33, left justified.
-    #b. The second one (the “Min” state) is of size 21, left justified.
-    #c. The third one (the “Min” value) is of size 6, right justified.
-    #d. The forth one (empty space) is of size 6.
-    #e. The fifth one (the “Max” state) is of size 15, left justified.
-    #f. The sixth one (the “Max” value) is of size 6, right justified.
-    #for p_list in csv_content[0].split(","):
-    #    print("{:<33s}".format(p_list))
+        print("{:<33s}: {:<21s} {} {:6} {} {:>15s} {}".format(indicator_value, state_value_min, "", min_value, "", state_value_max, max_value))
+        count += 1
+
+
