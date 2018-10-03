@@ -50,7 +50,7 @@ if csv_content != "":
 
         state_value = "Alabama"
         indicator_max_value = "0"
-        indicator_min_value = "0"
+        indicator_min_value = "1"
 
         print("{:<33s}: {:<21s} {:6s} {:>15s}".format(indicator_value, state_value ,indicator_min_value, indicator_max_value))
         count += 1
