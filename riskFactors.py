@@ -48,11 +48,16 @@ if csv_content != "":
         # Itterate through the top level indicators
         indicator_value = line_split[count]
 
-        state_value = "Alabama"
-        indicator_max_value = "0"
-        indicator_min_value = "1"
+        
+        indicator_max_value = max(parsed_csv,key=itemgetter(count))
+        indicator_min_value = min(parsed_csv,key=itemgetter(count))
+        state_value_max = indicator_max_value[0]
+        state_value_min = indicator_max_value[0]
 
-        print("{:<33s}: {:<21s} {:6s} {:>15s}".format(indicator_value, state_value ,indicator_min_value, indicator_max_value))
+        max_value = "{} {:6} {}".format(indicator_max_value[0],"",indicator_max_value(count))
+        min_value = "{} {:6} {}".format(indicator_min_value[0],"",indicator_min_value(count))
+
+        print("{:<33s}: {:<21s} {:>15s}".format(indicator_value ,max_value, min_value))
         count += 1
     #for x in line_split:
     #    count += 1
