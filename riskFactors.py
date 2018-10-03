@@ -20,12 +20,11 @@ def parse_csv(csv_content):
         # if it cannot read the content of the file, it will return nothing
         return ""
 
-#def set_csv_content(State = "", HeartDiseaseDeathRate = "", StrokeDeathRate = "",HIVDiagnosisRate = "", CLABSI_SIR = "", MotorVehicleDeathRate = "", OpioidAnalgesicsDeaths = "", TeenBirthRate = "", DiagnosedHighCholesterol = "", DiagnosedHypertension = "", MedicatedHypertension = "", AdultSmoking = "", YouthSmoking = "", AdultObesity = "", YouthObesity = "", AdultSeatBeltUse = "", YouthSeatBeltUse = "", AdultBingeDrinking = "", YouthBingeDrinking = "", ColorectalCancerScreening = "", WithoutHealthCareCoverage = ""):
+#def set_csv_values(State = "", HeartDiseaseDeathRate = "", StrokeDeathRate = "",HIVDiagnosisRate = "", CLABSI_SIR = "", MotorVehicleDeathRate = "", OpioidAnalgesicsDeaths = "", TeenBirthRate = "", DiagnosedHighCholesterol = "", DiagnosedHypertension = "", MedicatedHypertension = "", AdultSmoking = "", YouthSmoking = "", AdultObesity = "", YouthObesity = "", AdultSeatBeltUse = "", YouthSeatBeltUse = "", AdultBingeDrinking = "", YouthBingeDrinking = "", ColorectalCancerScreening = "", WithoutHealthCareCoverage = ""):
 #    return 0
 
-
+# Parse the CSV file into multiple lists
 parse_csv(open_csv('riskFactors.csv'))
-print(parsed_csv)
 
 if parsed_csv != []:
     #a. The first one (“Indicator”) is of size 33, left justified.
