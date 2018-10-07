@@ -9,7 +9,7 @@ def open_csv(filename):
     try:
         with open(filename, 'r') as f:
             # read the file and split by returns, then return the content
-            return f.read().split("\n")
+            return f.read().replace("%","").replace("N/A","0").split("\n")
     except:
         # if the file does not exist then return that it cannot find the file
         print("Cannot find file {}".format(filename))
@@ -36,7 +36,7 @@ if csv_content != "":
     count = 1
     line_split = csv_content[0].split(",")
 
-    print("{:<33s} {:<21s} {:6s} {:>15s}".format("Indicator", "", "Min", "Max"))
+    print("{:<33}{:<21}{:>15}".format("Indicator", "Min", "Max"))
     print("---------------------------------------------------------------------------------------")
 
     while count < len(line_split):
@@ -45,22 +45,18 @@ if csv_content != "":
 
         # Get the max for the specified indicator
         indicator_max_value = max(parsed_csv,key=itemgetter(count))
-        max_value = str(indicator_max_value[count])
+        max_value = float(indicator_max_value[count])
         state_value_max = indicator_max_value[0]
 
         # Get the min for the specified indicator
         indicator_min_value = min(parsed_csv,key=itemgetter(count))
-        min_value = str(indicator_min_value[count])
+        min_value = float(indicator_min_value[count])
         state_value_min = indicator_min_value[0]
         
-        #a. The first one (“Indicator”) is of size 33, left justified.
-        #b. The second one (the “Min” state) is of size 21, left justified.
-        #c. The third one (the “Min” value) is of size 6, right justified.
-        #d. The forth one (empty space) is of size 6.
-        #e. The fifth one (the “Max” state) is of size 15, left justified.
-        #f. The sixth one (the “Max” value) is of size 6, right justified.
+        if indicator_value == "Heart Disease Death Rate (2007)" or indicator_value == "Motor Vehicle Death Rate (2009)" or indicator_value == "Teen Birth Rate (2009)" or indicator_value == "Adult Smoking (2010)" or indicator_value == "Adult Obesity (2010)":
 
-        print("{:<33s}: {:<21s} {} {:6} {} {:>15s} {}".format(indicator_value, state_value_min, "", min_value, "", state_value_max, max_value))
+            indicator_value = indicator_value + ":"
+            print("{:<33s} {:<21s} {:>6.1f} {:^6} {:<15s} {:>6.1f}".format(indicator_value, state_value_min, min_value,"", state_value_max, max_value))
         count += 1
 
 
