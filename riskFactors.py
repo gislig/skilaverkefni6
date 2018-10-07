@@ -1,6 +1,3 @@
-# Import sorting toolkit
-from operator import itemgetter
-
 # Global variable list for the csv content
 parsed_csv = []
 
@@ -9,7 +6,9 @@ def open_csv(filename):
     try:
         with open(filename, 'r') as f:
             # read the file and split by returns, then return the content
-            return f.read().replace("%","").split("\n")
+            data = f.read().replace("%","").split("\n")
+            data = list(filter(None, data))
+            return data
     except:
         # if the file does not exist then return that it cannot find the file
         print("Cannot find file {}".format(filename))
@@ -26,34 +25,20 @@ def parse_csv(csv_content):
         # if it cannot read the content of the file, it will return nothing
         return ""
 
-# Convert all string values to int
-def parse_value_float(string_list):
-    new_float_list = []
-    for state_list in string_list:
-        converted_list = []
-        for value_list in state_list:
-            try:
-                converted_list.append(float(value_list))
-            except ValueError:
-                converted_list.append(value_list)
-
-        new_float_list.append(converted_list)
-    return new_float_list
-
 # Parse the CSV file into multiple lists
 # This will add the content of the csv file into a list
 # Which is assigned as a global variable
-csv_content = open_csv('riskFactors.csv')
+#file_selector = input("Enter filename containing csv data:")
+#csv_content = open_csv(file_selector)
+csv_content = open_csv('riskfactors.csv')
+print("{:<33}{:<21}{:>15}".format("Indicator", "Min", "Max"))
+print("-"*87)
 
 # Main
-if csv_content != "":
+if csv_content:
     # Call the parse list
     parse_csv(csv_content)
-    count = 1
     line_split = csv_content[0].split(",")
-
-    print("{:<33}{:<21}{:>15}".format("Indicator", "Min", "Max"))
-    print("-"*87)
 
     HeartDiseaseDeathRate = []
     MotorVehicleDeathRate = []
@@ -63,7 +48,6 @@ if csv_content != "":
     State = []
 
     for row in range(len(parsed_csv)):
-        
         State.append(parsed_csv[row][0])
         HeartDiseaseDeathRate.append(float(parsed_csv[row][1]))
         MotorVehicleDeathRate.append(float(parsed_csv[row][5]))
@@ -108,41 +92,3 @@ if csv_content != "":
     state_max_AdultObesity = State[AdultObesity.index(max(AdultObesity))]
     state_min_AdultObesity = State[AdultObesity.index(min(AdultObesity))]
     print("{:<33s}{:<21s}{:>6.1f}{:^6}{:<15s}{:>6.1f}".format(AdultObesity_indicatorvalue, state_min_AdultObesity, min_AdultObesity,"", state_max_AdultObesity, max_AdultObesity))
-
-
-    #count_states = 0
-    #count_lines = 0
-    
-    #parsed_float = parse_value_float(parsed_csv)
-    
-    #for p in range(len(parsed_float)):
-    #    print(p)
-#)
-    #while count_lines < len(line_split):
-    #    for t in range(len(parsed_float)):
-    #        print(max(parsed_float[0][count_lines])
-#
-    #    count_lines += 1
-##
-    #while count < len(line_split):
-    #    # Itterate through the top level indicators
-    #    indicator_value = line_split[count]
-#
-    #    # ---- Not working as I would have liked ---- #
-#
-    #    # Get the max for the specified indicator
-    #    indicator_max_value = max(parsed_csv,key=itemgetter(count))
-    #    max_value = float(indicator_max_value[count])
-    #    state_value_max = indicator_max_value[0]
-#
-    #    # Get the min for the specified indicator
-    #    indicator_min_value = min(parsed_csv,key=itemgetter(count))
-    #    min_value = float(indicator_min_value[count])
-    #    state_value_min = indicator_min_value[0]
-    #    
-    #    if indicator_value == "Heart Disease Death Rate (2007)" or indicator_value == "Motor Vehicle Death Rate (2009)" or indicator_value == "Teen Birth Rate (2009)" or indicator_value == "Adult Smoking (2010)" or indicator_value == "Adult Obesity (2010)":
-#
-    #        indicator_value = indicator_value + ":"
-    #        print("{:<33s} {:<21s} {:>6.1f} {:^6} {:<15s} {:>6.1f}".format(indicator_value, state_value_min, min_value,"", state_value_max, max_value))
-    #    
-    #    count += 1
