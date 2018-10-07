@@ -28,9 +28,9 @@ def parse_csv(csv_content):
 # Parse the CSV file into multiple lists
 # This will add the content of the csv file into a list
 # Which is assigned as a global variable
-#file_selector = input("Enter filename containing csv data:")
-#csv_content = open_csv(file_selector)
-csv_content = open_csv('riskfactors.csv')
+file_selector = input("Enter filename containing csv data:")
+csv_content = open_csv(file_selector)
+#csv_content = open_csv('riskfactors.csv')
 print("{:<33}{:<21}{:>15}".format("Indicator", "Min", "Max"))
 print("-"*87)
 
